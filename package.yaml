@@ -1,0 +1,35 @@
+name: tetris-server
+version: '0.0.0'
+github: "githubuser/tetris-server"
+license: MIT
+author: "Author name here"
+maintainer: "Author name here"
+
+extra-source-files:
+- CHANGELOG.md
+- LICENSE.md
+- package.yaml
+- README.md
+- stack.yaml
+
+ghc-options: -Wall
+
+executables:
+  tetris-server:
+    source-dirs: src
+    main: Main.hs
+    dependencies:
+    - base
+    - cryptonite
+    - wai
+    - warp
+    - aeson
+    - http-types
+    - stm
+    - binary
+    - bytestring
+    - containers
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
