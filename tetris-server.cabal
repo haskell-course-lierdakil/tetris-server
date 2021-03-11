@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: da570b8fe699c610a37ba944362c41c4a3029be25651c0ee75f383f5af352238
+-- hash: 406b3a33fb8459bac59c3390c306f20855bf0ae84890a00028262b0971aa7c00
 
 name:           tetris-server
-version:        0.0.0
+version:        0.0.0.1
 homepage:       https://github.com/githubuser/tetris-server#readme
 bug-reports:    https://github.com/githubuser/tetris-server/issues
 author:         Author name here

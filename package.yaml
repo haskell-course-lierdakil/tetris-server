@@ -1,5 +1,5 @@
 name: tetris-server
-version: '0.0.0'
+version: '0.0.0.1'
 github: "githubuser/tetris-server"
 license: MIT
 author: "Author name here"
