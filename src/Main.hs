@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Network.HTTP.Types
@@ -25,6 +26,14 @@ app score q req respond = case (requestMethod req, pathInfo req) of
   ("GET", ["score"]) -> do
     resp <- J.encode <$> readTVarIO score
     respond $ responseLBS status200 [("Content-Type", "application/json")] resp
+  ("PUT", ["score"]) ->
+    (J.decode <$> consumeRequestBodyStrict req) >>= \case
+      Just newScore -> do
+        atomically $ do
+          writeTVar score newScore
+          writeTQueue q newScore
+        respond $ responseLBS status200 [("Content-Type", "text/plain")] "OK"
+      _ -> respond $ responseLBS status400 [("Content-Type", "text/plain")] "Bad Request"
   ("POST", ["score"]) -> do
     oldscore <- readTVarIO score
     mNewScore <- fmap (M.fromListWith max) . J.decode <$> consumeRequestBodyStrict req
